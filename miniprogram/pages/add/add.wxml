@@ -1,0 +1,16 @@
+<view>
+
+  <view class='add-form'>
+    <input placeholder="请输入标题" class='add__input' value="{{title}}" bindinput="changeTitle" focus/>
+  </view>
+
+  <textarea  placeholder="请输入内容" class='add__textarea' bindinput="changeContent" value="{{content}}"/>
+
+  <view class='add-footer'>
+    <view class='add-btn'>
+      <view class='add-btn__save' bindtap="handleCancel">取消</view>    
+      <view class='add-btn__cancel' bindtap="handleSave">保存</view>
+    </view>
+  </view>
+
+</view>

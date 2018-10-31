@@ -1,0 +1,14 @@
+<view>
+  <view class="uploader">
+    <navigator url="./studyDatabase/studyDatabase" open-type="navigate" class="uploader-text">
+      <text>学习数据库操作</text>
+    </navigator>
+  </view>
+
+  <view class="uploader">
+    <navigator url="./studyFun/studyFun" open-type="navigate" class="uploader-text">
+      <text>学习云函数操作</text>
+    </navigator>
+  </view>
+
+</view>

@@ -1,0 +1,48 @@
+page{
+  background: #000;
+  height: 100%;
+}
+
+.add__input,
+.add__textarea{
+  background: #222;
+  color: #ccc;
+}
+
+.add__input{
+  font-size: 36rpx;
+  padding:15rpx 20rpx;
+}
+
+.add__textarea{
+  height: 340rpx;
+  width: 100%;
+  font-size: 30rpx;
+  padding:15rpx 20rpx;
+}
+
+.add-form{
+  border-bottom: 2rpx solid #333;
+}
+
+.add-footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.add-btn{
+  display: flex;
+  border-top: 1rpx solid #333;
+}
+.add-btn__cancel,
+.add-btn__save{
+  width: 50%;
+  text-align: center;
+  line-height: 96rpx;
+  color: #fff;
+}
+.add-btn__save{
+  background: #E14848;
+}
