@@ -1,0 +1,27 @@
+<view class='signin'>
+
+  <!-- 签到列表 -->
+  <block wx:for="{{signinList}}" wx:key="item._id">
+    <view class='item' bindtap='toItemDetailPage'  data-item="{{item}}">
+      <view class='item-head'>
+        <view class='item-head-left'>进行中</view>
+        <view class='item-head-right icon-remove' data-item="{{item}}" catchtap="removeSigninItem"></view>      
+      </view>
+
+      <view class='item-info'>
+        <view class='item-info-left'>
+          {{item.signinName}}
+        </view>
+        <view class='item-info-right'>
+          <text class='item-info-date'>{{item.signinBeginDate}}</text>
+          <text class='item-info-count'>{{item.total}}次</text>
+        </view>        
+      </view>
+
+      <view class='item-info-describe'>{{item.signinDescribe}}</view>
+    </view>
+  </block>
+
+  <!-- 添加 -->
+  <view class='add-btn icon-add' bindtap="addSigninItem"></view>
+</view>

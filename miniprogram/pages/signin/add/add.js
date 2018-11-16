@@ -1,4 +1,5 @@
-// pages/add/add.js
+
+const util = require("../../../util.js");
 Page({
 
   /**
@@ -7,12 +8,19 @@ Page({
   data: {
     title: '',//标题
     content:'',//内容
+    beginDate: util.formatDateStr(new Date()),//开始时间
+  },
+
+  // 选择时间
+  bindDateChange(e){
+    this.setData({
+      beginDate: e.detail.value
+    })
   },
 
   // 取消
   handleCancel(){
-    wx.navigateTo(-1);
-    // wx.navigateBack({delta:1});
+    wx.navigateBack({delta:1});
   },
 
   // 保存
@@ -22,18 +30,28 @@ Page({
       nullTip = "标题";
     } else if (!this.data.content){
       nullTip = "内容";
+    } else if (!this.data.beginDate){
+      nullTip = "开始时间";      
     }
 
     if (nullTip){
-      wx.showToast({ title: `${nullTip}不能为空！`, icon:'none'});
+      wx.showToast({ title: `'${nullTip}' 不能为空！`, icon:'none'});
     }else{
-      console.log("开始调用保存接口")
-  // 这里传参有问题
+
+      // 数据增加操作
       wx.cloud.callFunction({
-        name:'todo',
-        data:{title:111, content:1111},
-        success:res=>{
-          console.log("保存suc")
+        name: 'signinList',
+        data: {
+          "signinBeginDate": this.data.beginDate,
+          "signinDescribe": this.data.content,
+          "signinName": this.data.title
+        },
+        success: res => {
+          console.log(res,123)
+          wx.showToast({ title: "保存成功！", icon: 'success' });
+          wx.navigateTo({
+            url: '/pages/signin/signin',
+          });
         }
       })
     }

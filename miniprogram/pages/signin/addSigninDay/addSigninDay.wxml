@@ -1,0 +1,35 @@
+<view class='add-cont'>
+
+  <textarea  placeholder="请输入内容" class='add__textarea' bindinput="changeContent" value="{{content}}"/>
+
+  <view class="section">
+    <picker  mode="date"
+    disabled
+    value="{{beginDate}}"
+      bindchange="bindDateChange">
+      <view class="picker">
+        打卡时间: {{beginDate}}
+      </view>
+    </picker>
+    <block>
+      <view class='img-list'>
+        <view class='img-item' wx:key="item" wx:for="{{imagePathList}}">
+          <image class="img-item-dom" src="{{item}}"  mode="aspectFit"></image>
+        </view>
+        
+      </view>
+    </block>
+    <view bindtap='doUpload'>上传图片</view>
+  </view>
+
+
+
+  <view class='add-footer'>
+    <view class='add-btn'>
+      <view class='add-btn__cancel' bindtap="handleCancel">取消</view>    
+      <view class='add-btn__save' bindtap="handleSave">保存</view>
+    </view>
+  </view>
+
+</view>
+

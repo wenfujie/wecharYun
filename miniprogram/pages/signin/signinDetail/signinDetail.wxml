@@ -1,0 +1,23 @@
+<view>
+
+  <calendar show-more-days
+  lunar calendar-style="calendar" 
+  days-color="{{daysColor}}"
+  year="{{year}}" month="{{month}}"
+  weeks-type="cn"
+  cell-size='{{50}}'
+  bindnextMonth="changeDate"
+  bindprevMonth="changeDate"
+  binddateChange="changeDate"
+  binddayClick="dayClick"/>
+
+  <view hidden='{{!currentItem.signinDescribe}}' class='detail-describe'>
+    备注：{{currentItem.signinDescribe}}
+  </view>
+
+  <view class="signin-btn {{canSignin?'signin-btn--ok':''}}"
+   bindtap='toSigninPage'>今日打卡</view>
+
+
+</view>
+

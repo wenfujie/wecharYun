@@ -6,10 +6,12 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"appid": "wx1f5c6a2849c9c462",
 	"projectname": "wecharYun",
+	"libVersion": "2.3.2",
 	"condition": {
 		"search": {
 			"current": -1,

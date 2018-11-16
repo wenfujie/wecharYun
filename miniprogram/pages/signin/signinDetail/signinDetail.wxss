@@ -1,0 +1,27 @@
+.calendar {
+    background-color: #eeedff;
+    padding-top: 10px;
+}
+.signin-btn{
+  color:#666;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 15rpx;
+  background: #ccc;
+  position: fixed;
+  bottom: 30rpx;
+  left: 0;
+}
+.signin-btn--ok{
+  background: #EEEDFF;
+  color: #00a3e7;
+  font-weight: bold;
+}
+.detail-describe{
+  line-height: 42rpx;
+  padding: 20rpx 10%;
+  font-size: 32rpx;
+  color: #333;
+}
