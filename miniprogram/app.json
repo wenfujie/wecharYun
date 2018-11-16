@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/signin/signin",
+    
     "pages/signin/addSigninDay/addSigninDay",
     
-    "pages/signin/signin",    
     "pages/signin/signinDetail/signinDetail",
     "pages/signin/add/add"
   ],

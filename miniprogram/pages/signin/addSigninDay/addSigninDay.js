@@ -1,4 +1,5 @@
 const app =getApp()
+const imgNum = 3;
 Page({
 
   /**
@@ -11,44 +12,59 @@ Page({
   },
 
   // 上传图片
-  doUpload: function () {
-    console.log(app.globalData,123)
-    // 选择图片
+  doUpload(callback){
+    wx.showLoading({
+      title: '保存中~',
+    })
+    let cloudPath = '';
+    this.data.imagePathList.forEach((item,index)=>{
+      this.data.successNum = 0;
+      cloudPath = app.globalData.imgPath + (+new Date() + index) + item.match(/\.[^.]+?$/)[0];
+      wx.cloud.uploadFile({
+        cloudPath,
+        filePath:item,
+        success: res => {
+          this.data.successNum++;
+          if (this.data.successNum >= this.data.imagePathList.length){
+            wx.hideLoading();
+            typeof callback === 'function' && callback();
+          }
+        },
+        fail: e => {
+          console.error('[上传文件] 失败：', e)
+          wx.showToast({
+            icon: 'none',
+            title: '上传失败',
+          })
+        },
+        complete: () => {
+          
+        }
+      })
+    })
+
+  },
+
+  // 选择图片
+  selectedImg: function () {
+    let canSelectNum = imgNum - this.data.imagePathList.length;
+    if (canSelectNum<=0){
+      wx.showToast({
+        title: '最多上传3长图片',
+        icon:'none'
+      })
+      return ;
+    }
     wx.chooseImage({
-      count: 3,
+      count: canSelectNum,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res=> {
-
-        // wx.showLoading({
-        //   title: '上传中',
-        // })
-
-        const filePath = res.tempFilePaths[0]
-
-        // 上传图片
-        const cloudPath = app.globalData.imgPath + (+new Date())+ filePath.match(/\.[^.]+?$/)[0];
-        this.setData({ imagePathList: res.tempFilePaths });
-        
-        return 
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
+        const filePath = res.tempFilePaths;
+        filePath.forEach((item,index)=>{
+          this.data.imagePathList.push(res.tempFilePaths[index]);
         })
-
+        this.setData({ imagePathList: this.data.imagePathList });
       },
       fail: e => {
         console.error(e)
@@ -92,11 +108,13 @@ Page({
           "_signinProjectId": this.data.signinProjectId,
         },
         success: res => {
-          console.log(res, 123)
-          wx.showToast({ title: "保存成功！", icon: 'success' });
-          wx.navigateBack({
-            delta:1
-          })
+          let callback = ()=>{
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+          
+          this.doUpload(callback);
         }
       })
     }

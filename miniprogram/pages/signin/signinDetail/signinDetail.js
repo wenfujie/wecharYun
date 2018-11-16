@@ -138,7 +138,7 @@ Page({
     this.setData({
       currentItem: currentItem,
       daysColor: this.data.daysColor,
-      // stringDate: util.formatDateStr(new Date(e.detail.year, e.detail.month-1,e.detail.day))
+      stringDate: util.formatDateStr(new Date(e.detail.year, e.detail.month-1,e.detail.day))
     })
   }
 

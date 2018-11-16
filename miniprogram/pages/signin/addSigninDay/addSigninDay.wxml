@@ -19,7 +19,7 @@
         
       </view>
     </block>
-    <view bindtap='doUpload'>上传图片</view>
+    <view bindtap='selectedImg'>上传图片</view>
   </view>
 
 
