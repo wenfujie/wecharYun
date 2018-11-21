@@ -9,6 +9,19 @@ Page({
     content: '',//内容
     beginDate: '2016-09-01',//开始时间
     imagePathList:[],//已选中图片列表
+    upLoadImgList:[],
+  },
+  
+  // 长按删除图片
+  removeImg(e){
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除图片？',
+      success:()=>{
+        this.data.imagePathList.splice(e.currentTarget.dataset.index, 1);
+        this.setData({ imagePathList: this.data.imagePathList });
+      }
+    })
   },
 
   // 上传图片
@@ -17,14 +30,19 @@ Page({
       title: '保存中~',
     })
     let cloudPath = '';
+    this.data.successNum = 0;    
     this.data.imagePathList.forEach((item,index)=>{
-      this.data.successNum = 0;
       cloudPath = app.globalData.imgPath + (+new Date() + index) + item.match(/\.[^.]+?$/)[0];
       wx.cloud.uploadFile({
         cloudPath,
         filePath:item,
         success: res => {
+          this.data.upLoadImgList.push({
+            seq: index+1,
+            imgId: res.fileID
+          });
           this.data.successNum++;
+          
           if (this.data.successNum >= this.data.imagePathList.length){
             wx.hideLoading();
             typeof callback === 'function' && callback();
@@ -38,7 +56,6 @@ Page({
           })
         },
         complete: () => {
-          
         }
       })
     })
@@ -74,7 +91,6 @@ Page({
 
   // 选择时间
   bindDateChange(e) {
-    console.log(e.detail.value,11)
     this.setData({
       beginDate: e.detail.value
     })
@@ -96,28 +112,28 @@ Page({
 
     if (nullTip) {
       wx.showToast({ title: `'${nullTip}' 不能为空！`, icon: 'none' });
-    } else {
+      return false;
+    } 
 
+    let callback = ()=>{
       // 数据增加操作
       wx.cloud.callFunction({
         name: 'addSigninDay',
         data: {
           "signinDate": this.data.beginDate,
-          "signinImg": '123',
+          "signinImg": this.data.upLoadImgList,
           "signinDescribe": this.data.content,
           "_signinProjectId": this.data.signinProjectId,
         },
         success: res => {
-          let callback = ()=>{
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-          
-          this.doUpload(callback);
+          wx.navigateBack({
+            delta: 1
+          })
         }
       })
     }
+
+    this.doUpload(callback);    
   },
 
   // input值变化事件

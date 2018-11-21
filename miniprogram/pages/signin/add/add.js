@@ -47,11 +47,8 @@ Page({
           "signinName": this.data.title
         },
         success: res => {
-          console.log(res,123)
           wx.showToast({ title: "保存成功！", icon: 'success' });
-          wx.navigateTo({
-            url: '/pages/signin/signin',
-          });
+          wx.navigateBack({ delta: 1 });
         }
       })
     }

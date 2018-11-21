@@ -1,0 +1,75 @@
+<view class='list'>
+  <view class='row'>
+    <view class='col-left'>
+      <van-cell-group>
+        <van-field
+          type="textarea"
+          clearable
+          value="{{ value }}"
+          placeholder="请输入要添加事项"
+          border="{{ false }}"
+          bind:change="onInputChange"
+          maxlength="{{20}}"
+        />
+      </van-cell-group>
+    </view>
+
+    <view class='col-right'>
+      <van-button custom-class="vant-btn" size="small" type="primary">添加</van-button>
+    </view>
+  </view>
+</view>
+
+<view class='all-list'>
+<!-- 标题 -->
+  <view class='title' bindtap='handleShowTodoList' data-type="todo">
+    <view>待办事项</view>
+    <view class='show-icon'>
+      <van-icon name="{{showTodoList?'password-view':'password-not-view'}}" />
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class='list' hidden='{{!showTodoList}}'>
+    <view class='row' wx:for="{{[1]}}" wx:key="index">
+      <view class='col-left'>
+        <van-checkbox shape="square" value="{{ checked }}" bind:change="onChange">
+          复选框  复选框复 
+        </van-checkbox>
+      </view>
+
+      <view class='col-right'>
+        <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button>
+      </view>
+    </view>
+  </view>
+
+</view>
+    
+<view class='all-list'>
+<!-- 标题 -->
+  <view class='title' bindtap='handleShowTodoList' data-type="done">
+    <view>完成事项</view>
+    <view class='show-icon'>
+      <van-icon name="{{showDoneList?'password-view':'password-not-view'}}" />
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class='list' hidden='{{!showDoneList}}'>
+    <view class='row' wx:for="{{[1]}}" wx:key="index">
+      <view class='col-left'>
+        <van-checkbox shape="square" value="{{ checked }}" bind:change="onChange">
+          复选框   
+        </van-checkbox>
+      </view>
+
+      <view class='col-right'>
+        <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+    

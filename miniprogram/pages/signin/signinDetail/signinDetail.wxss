@@ -2,6 +2,10 @@
     background-color: #eeedff;
     padding-top: 10px;
 }
+.main-cont{
+  position: relative;
+  height:100%;
+}
 .signin-btn{
   color:#666;
   width: 80%;
@@ -24,4 +28,19 @@
   padding: 20rpx 10%;
   font-size: 32rpx;
   color: #333;
+}
+.img-list{
+  display: flex;
+  padding: 0 10%;  
+  padding-bottom:130rpx;
+}
+.img-item{
+  display: flex;
+  justify-content: center;
+  width: 28%;
+  padding: 0 2.5%;
+}
+.img-item-dom{
+  width: 200rpx;
+  height: 200rpx;
 }

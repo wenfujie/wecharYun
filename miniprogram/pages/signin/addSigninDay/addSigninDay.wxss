@@ -61,10 +61,26 @@ page{
 .img-item{
   display: flex;
   justify-content: center;
-  width: 28%;
+  width: 200rpx;
+  margin-right: 30rpx;
 }
+
 .img-item-dom{
   width: 200rpx;
   height: 200rpx;
 }
 
+.img-area{
+  display: flex;
+  padding-left: 30rpx;
+}
+.add-img-btn{
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #FAFAFA;  
+}
+.add-icon{
+  width: 200rpx;
+  height: 200rpx;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA4UlEQVRYR+2XPwrCUAyHkxYP0E06ubh7A8/gLXRzcmkrScDdSehtnJy9gktBuzg4KbxIB8HBwusfKEje/PJ+X74h4SEMfHDgfOgMkOf5qCzLOE3TS5tmOgOIyE5VN6oaEdGjKURnAGY+IOIqDMNxkiRXAzADZsAM/IcBETkCwNynG1UFRP+Bqqr3IAgWWZZVGb+XETPvEXHmCTBFxBgRT6r68qlxzq2J6FwL4PPI547tAjNgBsyAGRCRLQAsnXMTIno2maK9jOLqY1IURcTMt6bhvQC0Cf2u8d+jXZNq6g3gDZwOoSGp6I4KAAAAAElFTkSuQmCC") no-repeat center center;
+}

@@ -1,5 +1,4 @@
 <view class='add-cont'>
-
   <textarea  placeholder="请输入内容" class='add__textarea' bindinput="changeContent" value="{{content}}"/>
 
   <view class="section">
@@ -11,15 +10,17 @@
         打卡时间: {{beginDate}}
       </view>
     </picker>
-    <block>
+    <view class='img-area'>
       <view class='img-list'>
-        <view class='img-item' wx:key="item" wx:for="{{imagePathList}}">
+        <view class='img-item' wx:key="index" wx:for="{{imagePathList}}" data-index="{{index}}" bindlongpress="removeImg">
           <image class="img-item-dom" src="{{item}}"  mode="aspectFit"></image>
         </view>
-        
       </view>
-    </block>
-    <view bindtap='selectedImg'>上传图片</view>
+      <view class='add-img-btn' bindtap='selectedImg' hidden='{{imagePathList.length >= 3}}'>
+        <view class='add-icon'></view>
+      </view>
+    </view>
+    
   </view>
 
 

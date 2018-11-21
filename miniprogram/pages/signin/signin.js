@@ -10,7 +10,6 @@ Page({
 
   // 前往签到详情页
   toItemDetailPage(e){
-    console.log(e.currentTarget.dataset.item._id)
     wx.navigateTo({
       url: '/pages/signin/signinDetail/signinDetail?signinProjectId=' + e.currentTarget.dataset.item._id, 
     })
@@ -24,7 +23,6 @@ Page({
       _openid: "oQJOK5UkB9EdJmRJmTvd8DQaHtPo"
     }).get({
       success: res => {
-        console.log('[数据库] [查询记录] 成功: ', res)
         this.data.signinList = [];
         if(res.data.length > 0){
           let pJson = {};          
@@ -34,7 +32,6 @@ Page({
             })
             pJson[index].then((data)=>{
               item.total = data;
-              console.log("asdasda", data, item)              
               this.data.signinList.push(item);
               this.setData({ signinList: this.data.signinList });               
             })
@@ -49,10 +46,8 @@ Page({
     db.collection('signinDayList').where({
       _signinProjectId:item._id
     }).count().then(res => {
-      console.log(res.total,123)
       // item.total = res.total;
       resolve && resolve(res.total);
-      // console.log(res.total, item)      
       // this.data.signinList.push(item);
       // this.setData({ signinList: this.data.signinList});        
     })

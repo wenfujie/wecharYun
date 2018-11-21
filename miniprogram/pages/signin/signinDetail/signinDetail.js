@@ -11,6 +11,24 @@ Page({
     stringDate:"",//选中日期
     canSignin: true,//打卡按钮状态
     currentItem: {},//当前对象
+    show:false,//图片弹出层
+    selectImgSrc:'',//选中放大图得id
+  },
+
+  // 显示图片弹层
+  handleShowPopum(e){
+    this.setData({selectImgSrc: e.currentTarget.dataset.src},()=>{
+      wx.nextTick(()=>{
+        this.setData({
+          show: true
+        });
+      })
+    });
+  },
+  
+  // 蒙层关闭
+  onClose(){
+    this.setData({ show: false });
   },
 
   // 前往打卡信息填写页
@@ -36,6 +54,10 @@ Page({
     let minDate = new Date(curYear, curMonth - 1, 1);// 当前选中日期1号
     let maxDate = new Date(curYear, curMonth - 1, util.getDayCountOfMonth(curYear, curMonth - 1));// 当前选中日期最后一号
 
+    //用来排序
+    var compare = function (item1, item2) {
+      return item1.seq - item2.seq;
+    }
     // 根据this.data.signinProjectId获取已签到数据
     const db = wx.cloud.database();
     const _ = db.command;    
@@ -48,6 +70,9 @@ Page({
         if (dayList.length > 0){
 
           dayList.forEach((item) => {
+            if (Array.isArray(item.signinImg)){
+              item.signinImg.sort(compare)
+            }
             let date = item.signinDate.substring(8, 10);
             // 设置打卡按钮状态
             if (date == currentDate.getDate()) {
@@ -74,7 +99,6 @@ Page({
           });
         }
         this.setData({ daysColor: this.data.daysColor });
-        console.log(this.data.daysColor)
         
       }
     })
@@ -117,12 +141,12 @@ Page({
     let allArr = this.data.daysColor;
     let currentItem = {};
     for (let i = 0; i <= allArr.length;i++){
+      if (allArr[i] && allArr[i].selected) {
+        allArr.splice(i, 1);
+      }
       //判断点击天 是否打卡
       if (allArr[i] && (allArr[i].day == e.detail.day)){
         currentItem = allArr[i];
-      }
-      if (allArr[i] && allArr[i].selected){
-        allArr.splice(i,1);
       }
     }
     //更改选中色
@@ -132,8 +156,6 @@ Page({
       color: '#00a3e7',
       selected:true
     });
-
-    console.log(currentItem,"选中数据")
     // stringDate设置 是为了测试
     this.setData({
       currentItem: currentItem,

@@ -1,0 +1,51 @@
+/* 覆盖有赞按钮样式 */
+.vant-btn{
+  padding: 0 0!important;
+  border-radius: 8rpx!important;
+  min-width:80rpx!important;
+}
+.col-left .van-cell{
+  width: 600rpx!important;
+}
+
+.all-list{
+}
+.title{
+  line-height: 100rpx;
+  color: #999;
+  border-bottom: 1rpx solid #dcdcdc;
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.show-icon{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 80rpx;
+}
+.list{
+  padding: 0 30rpx;
+}
+.row{
+  display: flex;
+  padding: 15rpx 0;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #dcdcdc;
+}
+.row:last-child{
+  border-bottom: 1rpx solid #dcdcdc;  
+}
+.col-left{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.col-right{
+  display: flex;
+  align-items: center;
+}
+
+

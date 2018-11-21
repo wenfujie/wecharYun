@@ -1,4 +1,5 @@
-<view>
+<view class='main-cont'>
+ <scroll-view scroll-y style="height: 100%; position:relative;">
 
   <calendar show-more-days
   lunar calendar-style="calendar" 
@@ -15,9 +16,22 @@
     备注：{{currentItem.signinDescribe}}
   </view>
 
+  <view class='img-list'>
+    <view class='img-item' 
+    bindtap='handleShowPopum'
+    data-src="{{item.imgId}}"
+    wx:key="item.seq"
+     wx:for="{{currentItem.signinImg}}">
+      <image class="img-item-dom" src="{{item.imgId}}"  mode="aspectFit"></image>
+    </view>
+  </view>
+
   <view class="signin-btn {{canSignin?'signin-btn--ok':''}}"
    bindtap='toSigninPage'>今日打卡</view>
 
-
+</scroll-view>
+<van-popup show="{{ show }}" bind:close="onClose">
+  <image src="{{selectImgSrc}}" mode="aspectFit"></image>
+</van-popup>
 </view>
 

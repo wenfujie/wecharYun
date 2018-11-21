@@ -1,9 +1,8 @@
 {
   "pages": [
+    "pages/todo/todo",
     "pages/signin/signin",
-    
     "pages/signin/addSigninDay/addSigninDay",
-    
     "pages/signin/signinDetail/signinDetail",
     "pages/signin/add/add"
   ],
@@ -11,8 +10,18 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "打卡小程序",
+    "navigationBarTitleText": "打卡小助理",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "color": "black",
+    "selectedColor": "#00a3e7",
+    "backgroundColor":"#fff",
+    "borderStyle":"white",
+    "list":[
+      {"pagePath":"pages/signin/signin","text":"打卡"},
+      {"pagePath":"pages/todo/todo","text":"待办"}
+      ]
   },
   "plugins": {
     "calendar": {
