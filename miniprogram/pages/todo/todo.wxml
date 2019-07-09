@@ -15,7 +15,8 @@
     </view>
 
     <view class='col-right'>
-      <van-button custom-class="vant-btn" size="small" type="primary">添加</van-button>
+      <van-button custom-class="vant-btn" size="small" loading="{{state.toAdd}}"
+       type="primary" bind:click="addTodoItem">添加</van-button>
     </view>
   </view>
 </view>
@@ -25,21 +26,34 @@
   <view class='title' bindtap='handleShowTodoList' data-type="todo">
     <view>待办事项</view>
     <view class='show-icon'>
-      <van-icon name="{{showTodoList?'password-view':'password-not-view'}}" />
+      <view hidden="{{doingCount<=0}}">
+        <van-button custom-class="vant-btn" size="small" 
+        type="primary" catchtap="handleDone" loading="{{state.toDone}}"
+        data-arr="{{doingList}}" data-type="doing">完成</van-button>
+        <van-button custom-class="vant-btn btn-cut" size="small"
+         loading="{{state.removeDoing}}" catchtap="removeTodoList" 
+         data-arr="{{doingList}}" data-type="doing"
+         type="danger">删除</van-button>
+      </view>
+      <van-icon custom-class="icon-width" name="{{showTodoList?'password-view':'password-not-view'}}" />
     </view>
   </view>
 
   <!-- 列表 -->
   <view class='list' hidden='{{!showTodoList}}'>
-    <view class='row' wx:for="{{[1]}}" wx:key="index">
+    <view class='row' wx:for="{{doingList}}" wx:key="item._id">
       <view class='col-left'>
-        <van-checkbox shape="square" value="{{ checked }}" bind:change="onChange">
-          复选框  复选框复 
+        <van-checkbox shape="square"
+         bindtap='onclickBox'
+          value="{{ item.done }}"
+            data-index="{{index}}" 
+            data-type="doing">
+          {{item.title}}
         </van-checkbox>
       </view>
 
       <view class='col-right'>
-        <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button>
+        <!-- <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button> -->
       </view>
     </view>
   </view>
@@ -51,25 +65,40 @@
   <view class='title' bindtap='handleShowTodoList' data-type="done">
     <view>完成事项</view>
     <view class='show-icon'>
-      <van-icon name="{{showDoneList?'password-view':'password-not-view'}}" />
+      <view hidden="{{doneCount<=0}}">
+        <van-button custom-class="vant-btn" size="small" 
+          type="primary" catchtap="handleDone" loading="{{state.toDoing}}"
+          data-arr="{{doneList}}" data-type="done">待办</van-button>
+        <van-button custom-class="vant-btn btn-cut" size="small" 
+          loading="{{state.removeDone}}" catchtap="removeTodoList" 
+         data-arr="{{doneList}}" data-type="done"
+         type="danger">删除</van-button>
+      </view>      
+      <van-icon custom-class="icon-width" name="{{showDoneList?'password-view':'password-not-view'}}" />
     </view>
   </view>
 
   <!-- 列表 -->
   <view class='list' hidden='{{!showDoneList}}'>
-    <view class='row' wx:for="{{[1]}}" wx:key="index">
-      <view class='col-left'>
-        <van-checkbox shape="square" value="{{ checked }}" bind:change="onChange">
-          复选框   
+    <view class='row' wx:for="{{doneList}}" wx:key="item._id">
+      <view class='col-left done-checkbox'>
+        <van-checkbox shape="square"
+         value="{{ item.check }}"   
+         bindtap='onclickBox'
+            data-index="{{index}}" 
+            data-type="done">
+          {{item.title}}   
         </van-checkbox>
       </view>
 
       <view class='col-right'>
-        <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button>
+        <!-- <van-button custom-class="vant-btn" size="small" type="danger">删除</van-button> -->
       </view>
     </view>
   </view>
 
 </view>
+
+<van-toast id="van-toast" />
 
     

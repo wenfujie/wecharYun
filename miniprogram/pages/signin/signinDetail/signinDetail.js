@@ -59,7 +59,7 @@ Page({
       return item1.seq - item2.seq;
     }
     // 根据this.data.signinProjectId获取已签到数据
-    const db = wx.cloud.database();
+    const db = wx.cloud.database(); 
     const _ = db.command;    
     db.collection('signinDayList').where({
       _signinProjectId: this.data.signinProjectId,

@@ -6,6 +6,8 @@
     "van-button": "/miniprogram_npm/vant-weapp/button/index",
     "van-field": "/miniprogram_npm/vant-weapp/field/index",
     "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
-    "van-icon": "/miniprogram_npm/vant-weapp/icon/index"
-  }
+    "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
+  },
+  "enablePullDownRefresh":true
 }

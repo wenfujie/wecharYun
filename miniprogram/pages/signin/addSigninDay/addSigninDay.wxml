@@ -10,7 +10,9 @@
         打卡时间: {{beginDate}}
       </view>
     </picker>
-    <view class='img-area'>
+
+    <!-- 由于审核原因，暂时把保存图片功能注释 -->
+    <!-- <view class='img-area'>
       <view class='img-list'>
         <view class='img-item' wx:key="index" wx:for="{{imagePathList}}" data-index="{{index}}" bindlongpress="removeImg">
           <image class="img-item-dom" src="{{item}}"  mode="aspectFit"></image>
@@ -19,7 +21,7 @@
       <view class='add-img-btn' bindtap='selectedImg' hidden='{{imagePathList.length >= 3}}'>
         <view class='add-icon'></view>
       </view>
-    </view>
+    </view> -->
     
   </view>
 

@@ -126,14 +126,18 @@ Page({
           "_signinProjectId": this.data.signinProjectId,
         },
         success: res => {
+          console.log(res,".....")
           wx.navigateBack({
             delta: 1
           })
         }
       })
     }
-
-    this.doUpload(callback);    
+    if (this.data.imagePathList.length>0){
+      this.doUpload(callback);    
+    }else{
+      typeof callback === 'function' && callback();      
+    }
   },
 
   // input值变化事件

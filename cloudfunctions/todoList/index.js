@@ -3,21 +3,20 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 const db = cloud.database();
-const signinDayListCollection = db.collection('signinDayList');
+const todoList = db.collection('todoList');
 
 // 云函数入口函数
 exports.main = async (e, context) => {
   try {
     let { OPENID, APPID } = cloud.getWXContext();
-    return await signinDayListCollection.add({
+    return await todoList.add({
       // data 字段表示需新增的 JSON 数据
       data: {
-        "signinDate": e.signinDate,
-        "createdDate": db.serverDate(),
-        "signinImg": e.signinImg,
-        "signinDescribe": e.signinDescribe,
-        "_openId": OPENID,
-        "_signinProjectId": e._signinProjectId,
+        title: e.title,
+        createTime: db.serverDate(),
+        done: e.done,
+        _openId: OPENID,
+        doneTime:''
       },
     })
   } catch (e) {

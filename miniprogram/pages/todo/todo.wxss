@@ -7,6 +7,20 @@
 .col-left .van-cell{
   width: 600rpx!important;
 }
+.btn-cut{
+  margin: 0 15rpx!important;
+}
+.done-checkbox .van-checkbox__label{
+  color:#999;
+  text-decoration: line-through;
+}
+.icon-width{
+  width: 80rpx;
+}
+.van-button--primary{
+  background: #00a3e7!important;
+  border-color: #00a3e7!important;
+}
 
 .all-list{
 }
@@ -23,7 +37,6 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  width: 80rpx;
 }
 .list{
   padding: 0 30rpx;
