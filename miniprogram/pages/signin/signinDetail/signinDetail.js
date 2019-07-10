@@ -10,7 +10,7 @@ Page({
     daysColor: [],// 设置日期颜色
     stringDate:"",//选中日期
     canSignin: true,//打卡按钮状态
-    currentItem: {},//当前对象
+    currentItem: {},//当前对象 
     show:false,//图片弹出层
     selectImgSrc:'',//选中放大图得id
   },
@@ -73,7 +73,7 @@ Page({
             if (Array.isArray(item.signinImg)){
               item.signinImg.sort(compare)
             }
-            let date = item.signinDate.substring(8, 10);
+            let date = new Date(item.signinDate).getDate();
             // 设置打卡按钮状态
             if (date == currentDate.getDate()) {
               this.setData({ canSignin: false });
@@ -90,16 +90,15 @@ Page({
           this.data.daysColor = [];
         }
         
+        // 设置当天样式
         if (this.data.canSignin && curYear == currentDate.getFullYear() && curMonth == currentDate.getMonth()+1){
           this.data.daysColor.unshift({
             month: 'current',
             day: currentDate.getDate(),
-            color: '#fff',
-            background: '#f5a8f0'
+            color: '#fff'
           });
         }
         this.setData({ daysColor: this.data.daysColor });
-        
       }
     })
   },

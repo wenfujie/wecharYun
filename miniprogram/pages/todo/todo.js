@@ -184,7 +184,7 @@ Page({
 
   //获取待办事项列表
   getTodoList(callback){
-    let that = this;
+    let that = this; 
     wx.cloud.callFunction({
       name:"getTodoList",
       data:{},
@@ -199,7 +199,8 @@ Page({
           }
         })
         that.setData({
-          doneList:obj.done,doingList:obj.doing,
+          doneList:obj.done,
+          doingList:obj.doing,
           doingCount:0,
           doneCount:0
           });

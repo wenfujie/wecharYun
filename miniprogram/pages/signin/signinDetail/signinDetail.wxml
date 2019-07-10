@@ -2,14 +2,14 @@
  <scroll-view scroll-y style="height: 100%; position:relative;">
 
   <calendar show-more-days
-  lunar calendar-style="calendar" 
+  calendar-style="calendar" 
   days-color="{{daysColor}}"
   year="{{year}}" month="{{month}}"
   weeks-type="cn"
   cell-size='{{50}}'
   bindnextMonth="changeDate"
   bindprevMonth="changeDate"
-  binddateChange="changeDate"
+  binddateChange="changeDate" 
   binddayClick="dayClick"/>
 
   <view hidden='{{!currentItem.signinDescribe}}' class='detail-describe'>
@@ -27,7 +27,7 @@
   </view>
 
   <view class="signin-btn {{canSignin?'signin-btn--ok':''}}"
-   bindtap='toSigninPage'>今日打卡</view>
+   bindtap='toSigninPage'>打卡</view>
 
 </scroll-view>
 <van-popup show="{{ show }}" bind:close="onClose">

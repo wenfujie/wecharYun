@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/todo/todo",
     "pages/signin/signin",
+    "pages/todo/todo",
     "pages/signin/addSigninDay/addSigninDay",
     "pages/signin/signinDetail/signinDetail",
     "pages/signin/add/add"
@@ -13,30 +13,31 @@
     "navigationBarTitleText": "打卡小助理",
     "navigationBarTextStyle": "black"
   },
-  "tabBar":{
+  "tabBar": {
     "color": "#666",
     "selectedColor": "#00a3e7",
-    "backgroundColor":"#fff",
-    "borderStyle":"black",
-    "list":[
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
       {
-        "pagePath":"pages/signin/signin",
-        "text":"打卡",
-        "iconPath":"/images/signin.png",
-        "selectedIconPath":"/images/signin.png"
+        "pagePath": "pages/signin/signin",
+        "text": "打卡",
+        "iconPath": "/images/signin.png",
+        "selectedIconPath": "/images/signin.png"
       },
       {
-        "pagePath":"pages/todo/todo",
-        "text":"待办",
+        "pagePath": "pages/todo/todo",
+        "text": "todo",
         "iconPath": "/images/todo.png",
         "selectedIconPath": "/images/todo.png"
       }
-      ]
+    ]
   },
   "plugins": {
     "calendar": {
       "version": "1.1.3",
       "provider": "wx92c68dae5a8bb046"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
