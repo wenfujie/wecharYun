@@ -10,6 +10,7 @@ Page({
     beginDate: '2016-09-01',//开始时间
     imagePathList:[],//已选中图片列表
     upLoadImgList:[],
+    _id: '',// 有值表示为已打卡数据id
   },
   
   // 长按删除图片
@@ -116,22 +117,35 @@ Page({
     } 
 
     let callback = ()=>{
-      // 数据增加操作
-      wx.cloud.callFunction({
-        name: 'addSigninDay',
-        data: {
-          "signinDate": this.data.beginDate,
-          "signinImg": this.data.upLoadImgList,
-          "signinDescribe": this.data.content,
-          "_signinProjectId": this.data.signinProjectId,
-        },
-        success: res => {
-          console.log(res,".....")
-          wx.navigateBack({
-            delta: 1
-          })
-        }
-      })
+      if(this.data._id){
+        this.data.db.collection('signinDayList').doc(this.data._id).update({
+          // data 传入需要局部更新的数据
+          data: {
+            "signinDescribe": this.data.content,
+          },
+          success: function (res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }else{
+        // 数据增加操作
+        wx.cloud.callFunction({
+          name: 'addSigninDay',
+          data: {
+            "signinDate": this.data.beginDate,
+            "signinImg": this.data.upLoadImgList,
+            "signinDescribe": this.data.content,
+            "_signinProjectId": this.data.signinProjectId,
+          },
+          success: res => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
     }
     if (this.data.imagePathList.length>0){
       this.doUpload(callback);    
@@ -153,14 +167,16 @@ Page({
       content: e.detail.value
     });
   },
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
       beginDate: options.signinDate,
-      signinProjectId: options.signinProjectId
+      signinProjectId: options.signinProjectId,
+      _id: options._id,
+      db: wx.cloud.database()
     })
   },
 
@@ -175,7 +191,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 编辑打卡
+    if (this.data._id){
+      this.data.db.collection('signinDayList').where({
+        _id: this.data._id
+      }).get().then((res)=>{
+        this.setData({ content: res.data[0].signinDescribe});
+      })
+    }
   },
 
   /**

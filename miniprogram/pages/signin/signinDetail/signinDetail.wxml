@@ -9,7 +9,7 @@
   cell-size='{{50}}'
   bindnextMonth="changeDate"
   bindprevMonth="changeDate"
-  binddateChange="changeDate" 
+  binddateChange="changeDate"  
   binddayClick="dayClick"/>
 
   <view hidden='{{!currentItem.signinDescribe}}' class='detail-describe'>
@@ -26,8 +26,11 @@
     </view>
   </view>
 
-  <view class="signin-btn {{canSignin?'signin-btn--ok':''}}"
-   bindtap='toSigninPage'>打卡</view>
+  <!-- 暂时不需要限制今天打卡功能 -->
+  <view class="signin-btn signin-btn--ok"
+   bindtap='toSigninPage'>
+   {{currentItem._id?'编辑打卡':'打卡'}}
+   </view>
 
 </scroll-view>
 <van-popup show="{{ show }}" bind:close="onClose">

@@ -18,27 +18,40 @@ Page({
 
   // 获取签到列表
   getSigninList(){
-    const db = wx.cloud.database();
-    db.collection('signinList').where({
-      _openid: "oQJOK5UkB9EdJmRJmTvd8DQaHtPo"
-    }).get({
+    wx.cloud.callFunction({
+      name: 'getSigninList',
+      data: {
+      },
       success: res => {
         this.data.signinList = [];
-        if(res.data.length > 0){
-          let pJson = {};          
-          res.data.forEach((item,index) => {
-            pJson[index] = new Promise((resolve)=>{
-              this.getSigninCount(db, item, resolve);
-            })
-            pJson[index].then((data)=>{
-              item.total = data;
-              this.data.signinList.push(item);
-              this.setData({ signinList: this.data.signinList });               
-            })
-          })
-        }
+        let list = res.result.data;
+        this.setData({ signinList: list })
       }
     })
+    return
+
+    // const db = wx.cloud.database();
+    // db.collection('signinList').where({
+    // })
+    // .get({
+    //   success: res => {
+    //     this.data.signinList = [];
+    //     if(res.data.length > 0){
+    //       let pJson = {};  
+    //       this.setData({ signinList: res.data})        
+    //       // res.data.forEach((item,index) => {
+    //       //   pJson[index] = new Promise((resolve)=>{
+    //       //     this.getSigninCount(db, item, resolve);
+    //       //   })
+    //       //   pJson[index].then((data)=>{
+    //       //     item.total = data;
+    //       //     this.data.signinList.push(item);
+    //       //     this.setData({ signinList: this.data.signinList });               
+    //       //   })
+    //       // })
+    //     }
+    //   }
+    // })
   },
 
   // 获取列表条数
@@ -69,13 +82,23 @@ Page({
       success:(data)=>{
 
         if (data.confirm){
-          this.data.db.collection("signinList")
-            .doc(item._id).remove().then((res) => {
-              wx.showToast({
-                title: '删除成功！',
-              })
-              this.getSigninList();
-            })
+          // 删除签到日期子集
+          wx.cloud.callFunction({
+            name: 'removeSigninDays',
+            data: {
+              _signinProjectId: item._id
+            },
+            success: res => {
+              // 删除签到项目
+              this.data.db.collection("signinList")
+                .doc(item._id).remove().then((res) => {
+                  wx.showToast({
+                    title: '删除成功！',
+                  })
+                  this.getSigninList();
+                })
+            }
+          })
         }
 
       }

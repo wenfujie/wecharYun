@@ -40,7 +40,7 @@ Page({
 
       // 数据增加操作
       wx.cloud.callFunction({
-        name: 'signinList',
+        name: 'addSigninList',
         data: {
           "signinBeginDate": this.data.beginDate,
           "signinDescribe": this.data.content,

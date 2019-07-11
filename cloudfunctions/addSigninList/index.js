@@ -12,6 +12,7 @@ exports.main = async (e, context) => {
       data: {
         "signinBeginDate": e.signinBeginDate,
         "signinDescribe": e.signinDescribe,
+        "createTime": db.serverDate(),
         "signinName": e.signinName,
         "_openid": OPENID
       },
