@@ -1,4 +1,5 @@
-// pages/signin/signin.js
+
+let app = getApp();
 Page({
 
   /**
@@ -18,40 +19,22 @@ Page({
 
   // 获取签到列表
   getSigninList(){
-    wx.cloud.callFunction({
-      name: 'getSigninList',
-      data: {
-      },
-      success: res => {
-        this.data.signinList = [];
-        let list = res.result.data;
-        this.setData({ signinList: list })
-      }
+    wx.nextTick(()=>{
+      app.toastLoading();
+      wx.cloud.callFunction({
+        name: 'getSigninList',
+        data: {
+        },
+        success: res => {
+          this.data.signinList = [];
+          let list = res.result;
+          this.setData({ signinList: list })
+          app.toastLoading(false);
+          // 下拉刷新还原
+          wx.stopPullDownRefresh();
+        }
+      })
     })
-    return
-
-    // const db = wx.cloud.database();
-    // db.collection('signinList').where({
-    // })
-    // .get({
-    //   success: res => {
-    //     this.data.signinList = [];
-    //     if(res.data.length > 0){
-    //       let pJson = {};  
-    //       this.setData({ signinList: res.data})        
-    //       // res.data.forEach((item,index) => {
-    //       //   pJson[index] = new Promise((resolve)=>{
-    //       //     this.getSigninCount(db, item, resolve);
-    //       //   })
-    //       //   pJson[index].then((data)=>{
-    //       //     item.total = data;
-    //       //     this.data.signinList.push(item);
-    //       //     this.setData({ signinList: this.data.signinList });               
-    //       //   })
-    //       // })
-    //     }
-    //   }
-    // })
   },
 
   // 获取列表条数
@@ -110,14 +93,12 @@ Page({
    */
   onLoad: function (options) {
     this.data.db = wx.cloud.database();
-    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -145,7 +126,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getSigninList();
   },
 
   /**

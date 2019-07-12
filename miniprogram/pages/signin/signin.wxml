@@ -24,4 +24,6 @@
 
   <!-- 添加 -->
   <view class='add-btn icon-add' bindtap="addSigninItem"></view>
+
+  <van-toast id="van-toast" />
 </view>

@@ -16,6 +16,7 @@ exports.main = async (e, context) => {
         "createdDate": db.serverDate(),
         "signinImg": e.signinImg,
         "signinDescribe": e.signinDescribe,
+        "signinDateStamp": e.signinDateStamp,
         "_openId": OPENID,
         "_signinProjectId": e._signinProjectId,
       },

@@ -137,6 +137,7 @@ Page({
             "signinDate": this.data.beginDate,
             "signinImg": this.data.upLoadImgList,
             "signinDescribe": this.data.content,
+            "signinDateStamp": new Date(this.data.beginDate).getTime(),
             "_signinProjectId": this.data.signinProjectId,
           },
           success: res => {

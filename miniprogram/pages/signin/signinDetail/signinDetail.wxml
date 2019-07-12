@@ -2,6 +2,7 @@
  <scroll-view scroll-y style="height: 100%; position:relative;">
 
   <calendar show-more-days
+  lunar="{{ true }}"
   calendar-style="calendar" 
   days-color="{{daysColor}}"
   year="{{year}}" month="{{month}}"
@@ -29,12 +30,13 @@
   <!-- 暂时不需要限制今天打卡功能 -->
   <view class="signin-btn signin-btn--ok"
    bindtap='toSigninPage'>
-   {{currentItem._id?'编辑打卡':'打卡'}}
+   {{currentItem._id?'编辑打卡':'打卡'}}{{daysColor.length}}
    </view>
 
 </scroll-view>
 <van-popup show="{{ show }}" bind:close="onClose">
   <image src="{{selectImgSrc}}" mode="aspectFit"></image>
 </van-popup>
+  <van-toast id="van-toast" />
 </view>
 

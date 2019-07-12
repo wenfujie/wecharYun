@@ -59,6 +59,7 @@ Page({
 
   // 获取签到天数列表
   getSigninDayList(){
+
     let curYear = this.data.year;
     let curMonth = this.data.month;
 
@@ -69,47 +70,48 @@ Page({
     var compare = function (item1, item2) {
       return item1.seq - item2.seq;
     }
-    // 根据this.data.signinProjectId获取已签到数据
-    const db = wx.cloud.database(); 
-    const _ = db.command;    
-    db.collection('signinDayList').where({
-      _signinProjectId: this.data.signinProjectId,
-      createdDate: _.gte(minDate).and(_.lte(maxDate))
-    }).limit(10).get({
+
+    app.toastLoading();
+    wx.cloud.callFunction({
+      name: 'getSigninDayList',
+      data: {
+        _signinProjectId: this.data.signinProjectId,
+        minDate: minDate.getTime(),
+        maxDate: maxDate.getTime()
+      },
       success: res => {
-        let dayList = res.data;
-        if (dayList.length > 0){
+        let dayList = res.result;
+        if (dayList.length > 0) {
 
           dayList.forEach((item) => {
-            if (Array.isArray(item.signinImg)){
+            if (Array.isArray(item.signinImg)) {
               item.signinImg.sort(compare)
             }
             let date = new Date(item.signinDate).getDate();
-            // 设置打卡按钮状态（暂时不限制仅今天打卡）
-            // if (date == currentDate.getDate()) {
-            //   this.setData({ canSignin: false });
-            // }
             this.data.daysColor.push(util.extend({
               month: 'current',
               day: date,
-              color: '#fff',
-              background: '#000'
-            },item));
+              color: '#ffffff',
+              background: '#00a3e7'
+            }, item));
           })
 
-        }else{
+        } else {
           this.data.daysColor = [];
         }
-        
+
         // 设置当天样式
-        if (this.data.canSignin && curYear == currentDate.getFullYear() && curMonth == currentDate.getMonth()+1){
+        if (curYear == currentDate.getFullYear() && curMonth == currentDate.getMonth() + 1) {
           this.data.daysColor.unshift({
             month: 'current',
             day: currentDate.getDate(),
-            color: '#fff'
+            color: '#FF6EB4'
           });
         }
-        this.setData({ daysColor: this.data.daysColor });
+        wx.nextTick(()=>{
+          this.setData({ daysColor: this.data.daysColor });
+        })
+        app.toastLoading(false);
       }
     })
   },
@@ -124,6 +126,7 @@ Page({
   },
   
   onLoad: function(params) {
+    console.log(params.signinProjectId,"=====")
     this.data.signinProjectId = params.signinProjectId;
     this.updateCurrentDay();
   },
