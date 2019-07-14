@@ -1,12 +1,15 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init()
-const db = cloud.database();
-const signinListCollection = db.collection('signinList');
 
 exports.main = async (e, context) => {
   try {
-    let { OPENID, APPID} = cloud.getWXContext();
+    let { OPENID, APPID, ENV} = cloud.getWXContext();
+    cloud.updateConfig({
+      env: ENV
+    })
+    const db = cloud.database();
+    const signinListCollection = db.collection('signinList');
     return await signinListCollection.add({
       // data 字段表示需新增的 JSON 数据
       data: {

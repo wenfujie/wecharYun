@@ -75,9 +75,6 @@ Page({
               // 删除签到项目
               this.data.db.collection("signinList")
                 .doc(item._id).remove().then((res) => {
-                  wx.showToast({
-                    title: '删除成功！',
-                  })
                   this.getSigninList();
                 })
             }

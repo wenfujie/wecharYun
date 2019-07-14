@@ -6,7 +6,16 @@ App({
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
-      wx.cloud.init()
+
+      // let env = 'release-mgtm4';// 正式环境
+      let env = 'test-995828';// 测试环境
+      wx.cloud.init({
+        env: {
+          database: env,// 数据库
+          storage: env,// 文件存储
+          functions: env// 云函数
+        }
+      })
     }
 
     this.globalData = {

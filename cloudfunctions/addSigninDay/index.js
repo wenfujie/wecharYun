@@ -17,7 +17,7 @@ exports.main = async (e, context) => {
         "signinImg": e.signinImg,
         "signinDescribe": e.signinDescribe,
         "signinDateStamp": e.signinDateStamp,
-        "_openId": OPENID,
+        "_openid": OPENID,
         "_signinProjectId": e._signinProjectId,
       },
     })

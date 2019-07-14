@@ -15,7 +15,7 @@ exports.main = async (e, context) => {
         title: e.title,
         createTime: db.serverDate(),
         done: e.done,
-        _openId: OPENID,
+        _openid: OPENID,
         doneTime:''
       },
     })

@@ -2,6 +2,10 @@
 const app = getApp()
 const util = require("../../../util.js");
 const currentDate = new Date();//当前日期
+const c_signinDayFontColor = '#fff';// 已签到天字体色
+const c_signinDayBgColor = '#00a3e7';// 已签到天背景色
+const c_selectFontColor = '#EEAEEE';// 选中天字体颜色
+const c_currentFontColor = '#FF0000';// 当天字体颜色
 Page({
   data: {
     year: "2018",
@@ -87,12 +91,12 @@ Page({
             if (Array.isArray(item.signinImg)) {
               item.signinImg.sort(compare)
             }
-            let date = new Date(item.signinDate).getDate();
+            let date = new Date(item.signinDateStamp).getDate();
             this.data.daysColor.push(util.extend({
               month: 'current',
               day: date,
-              color: '#ffffff',
-              background: '#00a3e7'
+              color: c_signinDayFontColor,
+              background: c_signinDayBgColor
             }, item));
           })
 
@@ -105,10 +109,11 @@ Page({
           this.data.daysColor.unshift({
             month: 'current',
             day: currentDate.getDate(),
-            color: '#FF6EB4'
+            color: c_currentFontColor
           });
         }
         wx.nextTick(()=>{
+
           this.setData({ daysColor: this.data.daysColor });
         })
         app.toastLoading(false);
@@ -126,7 +131,6 @@ Page({
   },
   
   onLoad: function(params) {
-    console.log(params.signinProjectId,"=====")
     this.data.signinProjectId = params.signinProjectId;
     this.updateCurrentDay();
   },
@@ -167,7 +171,7 @@ Page({
     this.data.daysColor.push({
       month: 'current',
       day: e.detail.day,
-      color: '#00a3e7',
+      color: c_selectFontColor,
       selected:true
     });
     // stringDate设置 是为了测试

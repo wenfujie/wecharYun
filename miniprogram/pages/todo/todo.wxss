@@ -10,6 +10,9 @@
 .btn-cut{
   margin: 0 15rpx!important;
 }
+.doing-checkbox .van-checkbox__label{
+  color:#00a3e7;
+}
 .done-checkbox .van-checkbox__label{
   color:#999;
   text-decoration: line-through;

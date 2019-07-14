@@ -1,7 +1,7 @@
 <view class='main-cont'>
  <scroll-view scroll-y style="height: 100%; position:relative;">
 
-  <calendar show-more-days
+  <calendar
   lunar="{{ true }}"
   calendar-style="calendar" 
   days-color="{{daysColor}}"
@@ -30,7 +30,7 @@
   <!-- 暂时不需要限制今天打卡功能 -->
   <view class="signin-btn signin-btn--ok"
    bindtap='toSigninPage'>
-   {{currentItem._id?'编辑打卡':'打卡'}}{{daysColor.length}}
+   {{currentItem._id?'编辑打卡':'打卡'}}
    </view>
 
 </scroll-view>

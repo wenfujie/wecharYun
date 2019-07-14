@@ -10,7 +10,7 @@ exports.main = async (e, context) => {
   let { OPENID, APPID } = cloud.getWXContext();  
   try {
     let list = await todoList.where({
-      _openId: OPENID
+      _openid: OPENID
     }).get();
     return list;
   } catch (e) {

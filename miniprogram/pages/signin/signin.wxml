@@ -5,7 +5,9 @@
     <view class='item' bindtap='toItemDetailPage'  data-item="{{item}}">
       <view class='item-head'>
         <view class='item-head-left'>进行中</view>
-        <view class='item-head-right icon-remove' data-item="{{item}}" catchtap="removeSigninItem"></view>      
+        <view catchtap="removeSigninItem" class="icon-remove-parent" data-item="{{item}}">
+          <view class='item-head-right icon-remove'></view>  
+        </view>
       </view>
 
       <view class='item-info'>

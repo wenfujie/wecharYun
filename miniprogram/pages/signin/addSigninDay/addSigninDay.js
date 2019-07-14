@@ -130,6 +130,7 @@ Page({
           }
         })
       }else{
+        let beginDateArr = this.data.beginDate.split('-');
         // 数据增加操作
         wx.cloud.callFunction({
           name: 'addSigninDay',
@@ -137,7 +138,8 @@ Page({
             "signinDate": this.data.beginDate,
             "signinImg": this.data.upLoadImgList,
             "signinDescribe": this.data.content,
-            "signinDateStamp": new Date(this.data.beginDate).getTime(),
+            // 苹果手机不支持new Date('2019-7-11') 的形式
+            "signinDateStamp": new Date(beginDateArr[0], beginDateArr[1]-1, beginDateArr[2]).getTime(),
             "_signinProjectId": this.data.signinProjectId,
           },
           success: res => {
